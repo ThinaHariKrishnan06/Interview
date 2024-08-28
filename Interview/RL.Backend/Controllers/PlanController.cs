@@ -47,6 +47,13 @@ public class PlanController : ControllerBase
 
         return response.ToActionResult();
     }
+    [HttpDelete("DeleteProcedureToPlan")]
+    public async Task<IActionResult> DeleteProcedureToPlan(AddProcedurePlanToUserCommand command, CancellationToken token)
+    {
+        var response = await _mediator.Send(command, token);
+
+        return BadRequest();
+    }
 
     [HttpPost("MapProcedurePlanToUser")]
     public async Task<IActionResult> MapProcedurePlanToUser(AddProcedurePlanToUserCommand command, CancellationToken token)

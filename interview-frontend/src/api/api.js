@@ -32,6 +32,28 @@ export const addProcedureToPlan = async (planId, procedureId) => {
 
     return true;
 };
+export const deleteProcedureToPlan = async (planId, procedureId, userId, deleted) => {
+    try {
+        const url = `${api_url}/Plan/DeleteProcedureToPlan`;
+        var command = { planId: planId, procedureId: procedureId, userId: userId, deleted: deleted };
+        const response = await fetch(url, {
+            method: "DELETE",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(command),
+        });
+        console.log("response", response)
+        if (!response.ok) {
+            return false;
+        }
+    }
+    catch (err) {
+        return false;
+    }
+    return true;
+};
 export const MapUserProcedureToPlan = async (planId, procedureId, userId, deleted) => {
     const url = `${api_url}/Plan/MapProcedurePlanToUser`;
     var command = { planId: planId, procedureId: procedureId, userId: userId, deleted: deleted };

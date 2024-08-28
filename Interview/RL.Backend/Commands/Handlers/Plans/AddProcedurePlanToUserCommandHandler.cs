@@ -25,6 +25,8 @@ namespace RL.Backend.Commands.Handlers.Plans
                     return ApiResponse<Unit>.Fail(new BadRequestException("Invalid PlanId"));
                 if (request.ProcedureId < 1)
                     return ApiResponse<Unit>.Fail(new BadRequestException("Invalid ProcedureId"));
+                if (request.UserId < 0)
+                    return ApiResponse<Unit>.Fail(new BadRequestException("Invalid UserId"));
 
                 var plan = await _context.Plans.FirstOrDefaultAsync(p => p.PlanId == request.PlanId);
                 var procedure = await _context.Procedures.FirstOrDefaultAsync(p => p.ProcedureId == request.ProcedureId);
